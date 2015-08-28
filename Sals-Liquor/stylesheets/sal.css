@@ -1,0 +1,35 @@
+.container{
+    width: 1000px;
+
+    height: 80%;
+    margin: auto;
+    border: solid gray 1px;
+  }
+h1{
+  background-color: white;
+}
+.menu-container{
+  background-color: green;
+}
+#red-brands{
+  display: none;
+}
+
+#white-brands{
+  display: none;
+}
+.column1{
+  width:75%;
+  height:750px;
+  float:left;
+  border: solid gray 1px;
+  background: red;
+}
+
+.column2{
+  width: 20%;
+  height: 750px;
+  float:right;
+  border-color: solid gray 1px;
+  background: blue;
+}
