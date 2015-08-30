@@ -1,50 +1,124 @@
+body{
+  background-image: rgba(255, 255, 255, 1);
+  background-image: url('/img/1030_grapes.jpg');
+}
+
 .container{
-    width: 850px;
-    height: 80%;
-    margin: auto;
-    border: solid gray 1px;
-  }
-h1{
-  background-color: white;
+  width: 90%;
+  height:800px;
+  margin: auto;
+  border: solid gray 2px;
+  border-radius: 25px;
+}
+header{
   text-align: center;
+  padding:0;
+  height: 60px;
+}
+h1{
+  padding-bottom: 10px;
+  font-family:cursive;
+  margin-top: 0px;
 }
 .menu-container{
   background-color: green;
+  height:80%;
+  margin:0px;
 }
+
+.brand-name{
+  width: 100px;
+  border-radius: 15px;
+  margin-left: 25px;
+  margin-bottom: 10px;
+  padding:5px;
+  background-color: #303030;
+  color:#b9b9b9;
+}
+
 #red-brands{
   display: none;
+  position:absolute;
 }
 
 #white-brands{
   display: none;
+  position:absolute;
 }
+
+#champagne-brands{
+  display: none;
+  position: absolute;
+}
+
 .column1{
-  width:75%;
-  height:750px;
+  width:80%;
+  height:100%;
   float:left;
-  border: solid gray 1px;
-  background: red;
+  background-color: rgba(200, 200, 200, 0.75);
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .column2{
-  width: 20%;
-  height: 750px;
+  width: 19.8%;
+  height: 100%;
   float:right;
-  border-color: solid gray 1px;
-  background: blue;
+  background-color: rgba(200, 200, 200, 0.75);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 ul{
-  display: inline;
   list-style-type: none;
+  padding: 0px;
+}
+
+ul#wine-types{
+  margin-left: 50px;
+}
+
+.champagne-li{
+  /*display:inline-block;*/
+  width: 33%;
+  left:0px;
+  margin:0px;
+  float:left;
+};
+
+.red-li{
+  /*display:inline-block;*/
+  width: 33%;
+  left:0px;
+  margin:0px;
+  float:left;
+}
+
+.white-li{
+  /*display:inline-block;*/
+  width: 33%;
+  left:0px;
+  margin:0px;
+  float:left;
 }
 
 button.red{
-  margin: 20px;
-  height: 30px;
+  margin: 10px;
+  height: 20px;
+  width: 150px;
+  text-transform: uppercase;
 }
 
 button.white{
-  margin: 20px;
-  height: 30px;
+  margin: 10px;
+  height: 20px;
+  width: 150px;
+  text-transform: uppercase;
+}
+
+button.champagne{
+  margin: 10px;
+  height: 20px;
+  width: 150px;
+  text-transform: uppercase;
 }

@@ -19,12 +19,17 @@ $(function() {
         {name:'Cavit', price: 12.99, size: '750ml'},
         {name:'Cesari', price: 9.99, size: '750ml'},
         {name:'Cavit', price: 10.99, size: '1.5l'},
-        {name:'Ruffino', price: 9.99, size: '1.5l'}
+        {name:'Ruffino', price: 9.99, size: '1.5l'},
+        {name:'Relax', price: 9.99, size:'750ml'},
+        {name:'Blue Fish', price: 8.99, size:'750ml'},
+        {name:'Dr.Loosen', price: 12.99, size:'750ml'},
+        {name:'Blue Fish', price:12.99, size:'1.5l'},
+        {name:'Salmon Run', price:12.99, size:'1.5l'}
       ]
     },
     {
         type: 'champagne',
-        brands; [
+        brands: [
           {name:'Andre', price:9.99, size:'750mL'},
           {name:'Moet Imperial', price: 49.99, size: '750ml'},
           {name:'Moet Nectar', price: 55.99, size: '750ml'},
@@ -33,6 +38,7 @@ $(function() {
       ]
     },
   ];
+
 //Variables
 
 var totalbeforeTax;
@@ -48,11 +54,12 @@ var totalbeforeTax2;
       var ulBrands = $('<ul id="red-brands">');
     } else if(wine.type == 'white') {
       var ulBrands = $('<ul id="white-brands">');
+    } else if (wine.type == 'champagne') {
+      var ulBrands = $('<ul id="champagne-brands">');
     }
     wine.brands.forEach(function(brand,index) {
-      var $button = $('<button>', {id:index, class:'brand-name'}).text(brand.name + " $" + brand.price + " size:" + brand.size)
-      ulBrands.append($('<li>').append($button));
-
+      var $eachBrandButton = $('<button>', {id:index, class:'brand-name'}).text(brand.name + " $" + brand.price + " size:" + brand.size)
+      ulBrands.append($('<li>').append($eachBrandButton));
     });
     $('.'+wine.type+"-li").append(ulBrands);
   }); // end of wines.forEach()
@@ -66,6 +73,10 @@ var totalbeforeTax2;
     $('#white-brands').toggle();
   });
 
+  $('.champagne').click(function(){
+    $('#champagne-brands').toggle();
+  });
+
   // Calucuating Discount
   function calculateDiscount(){
   var discount = ($('#discount-rate2').val())*0.01;
@@ -73,11 +84,13 @@ var totalbeforeTax2;
   console.log(totalbeforeTax2);
   var discountedTotal = $("#discountedTotal").val(totalWithDiscount);
   console.log(discountedTotal);
-  // $('#totalAfterDiscount').append(discountedTotal);
 
+  // Calculating grandtotal
   var grandTotal = totalWithDiscount+(totalWithDiscount*0.08875);
   $('#grand-total2').val(grandTotal);
   };
+
+  // Calling discount function when a input is present;
   $('#discount-rate2').on('keypress',function(){
     calculateDiscount();});
 
@@ -103,10 +116,16 @@ var totalbeforeTax2;
       var WinePrice = $('<span class="ordered-item-price">').text(OrderedItem.price);
       var WineSize = $('<span class="ordered-item-size">').html(" " + OrderedItem.size + "<br>");
       ulCart.append(WineName).append(WinePrice).append(WineSize);
+    }else if(parentID=='champagne-brands'){
+      var OrderedItem = wines[2].brands[clickedID];
+      var WineName = $('<span class="ordered-item">').text(OrderedItem.name + " $ ");
+      var WinePrice = $('<span class="ordered-item-price">').text(OrderedItem.price);
+      var WineSize = $('<span class="ordered-item-size">').html(" " + OrderedItem.size + "<br>");
+      ulCart.append(WineName).append(WinePrice).append(WineSize);
     };
     //End of shopping cart
 
-    //Calculating....
+    //Calculating subtotal at each click
     var subtotalArray=[];
     var OrderedPrices = $('span.ordered-item-price');
     for(var i=0; i<OrderedPrices.length; i++){
@@ -129,11 +148,6 @@ var totalbeforeTax2;
   });//End of click order function
 
 
-  //Calculating with Tax
-  // var totalAfterTax = totalbeforeTax*0.08875
-  // $('#grand-total2').val(totalAfterTax);
-
-
 }); // end of jQuery Closure
 
 
@@ -148,12 +162,12 @@ var totalbeforeTax2;
   //   ['Merlot',
   //     {name:'Coppola', price: 19.99, size: '750ml'},
   //     {name:'Simi Sonoma', price: 21.99, size: '750ml'},
-      {name:'Wild Horse', price: 18.99, size: '750ml'},
-      {name:'Rutherfold Hill', price: 19.99, size: '1.5l'},
-      {name:'Kendall Jackson Reserve', price: 19.99, size: '1.5l'},
-      {name:'Woodbridge', price: 12.99, size: '1.5l'},
-      {name:'Woodbridge', price: 9.99, size: '750ml'}
-  //   ],
+  //     {name:'Wild Horse', price: 18.99, size: '750ml'},
+  //     {name:'Rutherfold Hill', price: 19.99, size: '1.5l'},
+  //     {name:'Kendall Jackson Reserve', price: 19.99, size: '1.5l'},
+  //     {name:'Woodbridge', price: 12.99, size: '1.5l'},
+  //     {name:'Woodbridge', price: 9.99, size: '750ml'}
+  // //   ],
   //   ['Cabernet Sauvignon',
   //     {name:'Coppola', price: 16.99, size: '750ml'},
   //     {name:'Simi Sonoma', price: 21.99, size: '750ml'},
@@ -195,11 +209,11 @@ var totalbeforeTax2;
   //     {name:'Woodbridge', price: 16.99, size: '1.5l'},
   //   ],
   //   ['Riesling',
-  //     {name:'Relax', price: 9.99, size:'750ml'},
-  //     {name:'Blue Fish', price: 8.99, size:'750ml'},
-  //     {name:'Dr.Loosen', price: 12.99, size:'750ml'},
-  //     {name:'Blue Fish', price:12.99, size:'1.5l'},
-  //     {name:'Salmon Run', price:12.99, size:'1.5l'}
+      // {name:'Relax', price: 9.99, size:'750ml'},
+      // {name:'Blue Fish', price: 8.99, size:'750ml'},
+      // {name:'Dr.Loosen', price: 12.99, size:'750ml'},
+      // {name:'Blue Fish', price:12.99, size:'1.5l'},
+      // {name:'Salmon Run', price:12.99, size:'1.5l'}
   //   ],
   //   ['Sauvignon Blanc',
   //     {name:'Kendall Jackson', price: 15.99, size: '750ml'},
@@ -216,14 +230,14 @@ var totalbeforeTax2;
   //   ]
   // ];
   //   //champagnes
-    var champagne_array=
-      ['champagne',
-        {name:'Andre', price:9.99, size:'750mL'},
-        {name:'Moet Imperial', price: 49.99, size: '750ml'},
-        {name:'Moet Nectar', price: 55.99, size: '750ml'},
-        {name:'Veuve Clicquot', price: 53.99, size: '750ml'},
-        {name:'Martin & Rossi Asti', price: 53.99, size: '750ml'}
-    ]
+    // var champagne_array=
+    //   ['champagne',
+    //     {name:'Andre', price:9.99, size:'750mL'},
+    //     {name:'Moet Imperial', price: 49.99, size: '750ml'},
+    //     {name:'Moet Nectar', price: 55.99, size: '750ml'},
+    //     {name:'Veuve Clicquot', price: 53.99, size: '750ml'},
+    //     {name:'Martin & Rossi Asti', price: 53.99, size: '750ml'}
+    // ]
   // ;
   //
   // var wines = ['Red Wine', 'White Wines', 'Champagnes']
