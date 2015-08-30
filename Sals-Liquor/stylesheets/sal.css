@@ -4,7 +4,7 @@ body{
 
 .container{
   width: 90%;
-  height:800px;
+  height:500px;
   margin: auto;
   border: solid gray 2px;
   border-radius: 25px;
@@ -26,6 +26,7 @@ h1{
   background-color: rgba(200, 200, 200, 0.85);
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
+  overflow: auto;
 }
 
 h4{
@@ -49,17 +50,14 @@ ul{
 
 #red-brands{
   display: none;
-  position:absolute;
 }
 
 #white-brands{
   display: none;
-  position:absolute;
 }
 
 #champagne-brands{
   display: none;
-  position: absolute;
 }
 
 ul#wine-types{
@@ -139,6 +137,7 @@ button.champagne{
   background-color: rgba(200, 200, 200, 0.85);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
+  overflow:auto;
 }
 
 #order-list{
@@ -150,8 +149,8 @@ span{
   font-family: sans-serif;
 }
 .cost{
+  margin-top: 10px;
   margin-left: 10px;
-  margin-bottom: 10px;
-  font-size: 15px;
+  font-size: 13px;
   font-family: sans-serif;
 }

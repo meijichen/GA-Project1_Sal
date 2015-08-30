@@ -58,7 +58,7 @@ var totalbeforeTax2;
       var ulBrands = $('<ul id="champagne-brands">');
     }
     wine.brands.forEach(function(brand,index) {
-      var $eachBrandButton = $('<button>', {id:index, class:'brand-name'}).text(brand.name + " $" + brand.price + " size:" + brand.size)
+      var $eachBrandButton = $('<button>', {id:index, class:'brand-name'}).html(brand.name + " $" + brand.price + " size:" + brand.size)
       ulBrands.append($('<li>').append($eachBrandButton));
     });
     $('.'+wine.type+"-li").append(ulBrands);
@@ -77,7 +77,26 @@ var totalbeforeTax2;
     $('#champagne-brands').toggle();
   });
 
-  // Calucuating Discount
+
+  //Calculating subtotal at each click
+  function subtotalOfEach(){
+    var subtotalArray=[];
+    var OrderedPrices = $('span.ordered-item-price');
+    for(var i=0; i<OrderedPrices.length; i++){
+    subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
+    };
+    totalbeforeTax = 0;
+    console.log(subtotalArray);
+    subtotalArray.forEach(function(eachPrice){
+      totalbeforeTax += eachPrice;
+      totalbeforeTax2 = (totalbeforeTax).toFixed(2);
+      $('#subtotal2').val(totalbeforeTax2);
+      return totalbeforeTax2;
+    });
+  };//End of Subtotal function
+
+  // Calucuating Total
+  // Calculating discount
   function calculateDiscount(){
   var discount = ($('#discount-rate2').val())*0.01;
   var totalWithDiscount = totalbeforeTax2 * (1 - discount);
@@ -92,7 +111,8 @@ var totalbeforeTax2;
 
   // Calling discount function when a input is present;
   $('#discount-rate2').on('keypress',function(){
-    calculateDiscount();});
+    calculateDiscount();
+  });
 
 //Setting up the shoping cart
   //Identifing Ordered Item
@@ -105,47 +125,43 @@ var totalbeforeTax2;
   //Adding items to cart
     if(parentID=='white-brands'){
       var OrderedItem = wines[1].brands[clickedID];
-
-      var WineName = $('<span class="ordered-item">').text(OrderedItem.name + " $ ");
+      var WineName = $('<span class="ordered-item-name">').text(OrderedItem.name + " $ ");
       var WinePrice =$('<span class="ordered-item-price">').text(OrderedItem.price);
       var WineSize =$('<span class="ordered-item-size">').html(" " + OrderedItem.size + "<br>");
-      ulCart.append(WineName).append(WinePrice).append(WineSize);
+      var $orderedItemLi= $('<li>',{class:'ordered-item'});
+      $orderedItemLi.append(WineName).append(WinePrice).append(WineSize);
+      ulCart.append($orderedItemLi);
     }else if(parentID=='red-brands'){
       var OrderedItem = wines[0].brands[clickedID];
-      var WineName = $('<span class="ordered-item">').text(OrderedItem.name + " $ ");
+      var WineName = $('<span class="ordered-item-name">').text(OrderedItem.name + " $ ");
       var WinePrice = $('<span class="ordered-item-price">').text(OrderedItem.price);
       var WineSize = $('<span class="ordered-item-size">').html(" " + OrderedItem.size + "<br>");
-      ulCart.append(WineName).append(WinePrice).append(WineSize);
+      var $orderedItemLi= $('<li>',{class:'ordered-item'});
+      $orderedItemLi.append(WineName).append(WinePrice).append(WineSize);
+      ulCart.append($orderedItemLi);
     }else if(parentID=='champagne-brands'){
       var OrderedItem = wines[2].brands[clickedID];
-      var WineName = $('<span class="ordered-item">').text(OrderedItem.name + " $ ");
+      var WineName = $('<span class="ordered-item-name">').text(OrderedItem.name + " $ ");
       var WinePrice = $('<span class="ordered-item-price">').text(OrderedItem.price);
       var WineSize = $('<span class="ordered-item-size">').html(" " + OrderedItem.size + "<br>");
-      ulCart.append(WineName).append(WinePrice).append(WineSize);
+      var $orderedItemLi= $('<li>',{class:'ordered-item'});
+      $orderedItemLi.append(WineName).append(WinePrice).append(WineSize);
+      ulCart.append($orderedItemLi);
     };
     //End of shopping cart
 
-    //Calculating subtotal at each click
-    var subtotalArray=[];
-    var OrderedPrices = $('span.ordered-item-price');
-    for(var i=0; i<OrderedPrices.length; i++){
-    subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
-    };
-    // console.log(subtotalArray);
+    //Beginning of order edit function
+    $('.ordered-item').on('click',function(event){
+      $(event.currentTarget).remove();
+      console.log("remove");
+      subtotalOfEach();
+      calculateDiscount();
+    });//End of order edit click function
 
-    // Subtotal of selected items
-    totalbeforeTax = 0;
-    console.log(subtotalArray);
-    subtotalArray.forEach(function(eachPrice){
-      totalbeforeTax += eachPrice;
-      totalbeforeTax2 = (totalbeforeTax).toFixed(2);
-      $('#subtotal2').val(totalbeforeTax2);
-      return totalbeforeTax2;
-    });
-
+    subtotalOfEach();
     calculateDiscount();
 
-  });//End of click order function
+  });//End of click to add/remove order items function
 
 
 }); // end of jQuery Closure
