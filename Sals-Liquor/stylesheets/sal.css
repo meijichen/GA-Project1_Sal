@@ -1,5 +1,4 @@
 body{
-  background-image: rgba(255, 255, 255, 1);
   background-image: url('/img/1030_grapes.jpg');
 }
 
@@ -20,20 +19,32 @@ h1{
   font-family:cursive;
   margin-top: 0px;
 }
-.menu-container{
-  background-color: green;
-  height:80%;
-  margin:0px;
+.column1{
+  width:80%;
+  height:100%;
+  float:left;
+  background-color: rgba(200, 200, 200, 0.85);
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+h4{
+  text-align: center;
+  font-style: italic;
+  font-family: sans-serif;
+}
+ul{
+  list-style-type: none;
+  padding: 0px;
 }
 
 .brand-name{
   width: 100px;
   border-radius: 15px;
   margin-left: 25px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding:5px;
-  background-color: #303030;
-  color:#b9b9b9;
+  background-color: white;
 }
 
 #red-brands{
@@ -51,74 +62,96 @@ h1{
   position: absolute;
 }
 
-.column1{
-  width:80%;
-  height:100%;
-  float:left;
-  background-color: rgba(200, 200, 200, 0.75);
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-
-.column2{
-  width: 19.8%;
-  height: 100%;
-  float:right;
-  background-color: rgba(200, 200, 200, 0.75);
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
-
-ul{
-  list-style-type: none;
-  padding: 0px;
-}
-
 ul#wine-types{
-  margin-left: 50px;
+  margin-left: 70px;
+
 }
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
 
 .champagne-li{
-  /*display:inline-block;*/
   width: 33%;
   left:0px;
-  margin:0px;
+  margin:auto;
   float:left;
-};
+}
 
 .red-li{
-  /*display:inline-block;*/
   width: 33%;
   left:0px;
-  margin:0px;
+  margin:auto;
   float:left;
 }
 
 .white-li{
-  /*display:inline-block;*/
   width: 33%;
   left:0px;
-  margin:0px;
+  margin:auto;
   float:left;
 }
 
+
 button.red{
-  margin: 10px;
-  height: 20px;
+  margin: auto;
+  height: 40px;
   width: 150px;
   text-transform: uppercase;
+  background-color: #303030;
+  color:#b9b9b9;
+  border-radius: 15px;
 }
 
 button.white{
-  margin: 10px;
-  height: 20px;
+  margin: auto;
+  height: 40px;
   width: 150px;
   text-transform: uppercase;
+  background-color: #303030;
+  color:#b9b9b9;
+  border-radius: 15px;
 }
 
 button.champagne{
-  margin: 10px;
-  height: 20px;
+  margin: auto;
+  height: 40px;
   width: 150px;
   text-transform: uppercase;
+  background-color: #303030;
+  color:#b9b9b9;
+  border-radius: 15px;
+}
+
+.column2{
+  width: 19.9%;
+  height: 100%;
+  float:right;
+  background-color: rgba(200, 200, 200, 0.85);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+#order-list{
+  margin-left: 10px;
+}
+span{
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-family: sans-serif;
+}
+.cost{
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
 }

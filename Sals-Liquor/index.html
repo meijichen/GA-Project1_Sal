@@ -12,10 +12,12 @@
 
 <main class='container'>
   <div class='column1'>
+  <h4>Wine List</h4>
 
 
     <div class='menu-container'>
-      <ul id='wine-types'>
+      <ul id='wine-types' class="row clearfix">
+    
         <!-- types go here -->
       </ul>
     </div>
@@ -23,16 +25,19 @@
 
   <div class='column2'>
     <div id='order-list'>
+      <h4>Order List</h4>
+
 
        <!-- List of ordered items. -->
 
     </div>
     <section class='reciept'>
+      <h4>Receipt</h4>
 
       <ul class='cost'>
         <li id= 'subtotal'> Subtotal: <input id='subtotal2'></li>
-        <li id= 'discount-rate'> Discount%: <input id=discount-rate2 value = 0></input></li>
-        <li id=totalAfterDiscount><input id=discountedTotal></li>
+        <li id= 'discount-rate'> Discount (%): <input id=discount-rate2 value = 0 placeholder = "enter discount %"></input></li>
+        <li id=totalAfterDiscount>Adjusted Total<input id=discountedTotal></li>
         <li id= 'tax-rate'>NYC tax = 8.875%</li>
         <li id= 'grand-total'> <input id='grand-total2'></li>
       </ul>
