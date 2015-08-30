@@ -44,6 +44,41 @@ $(function() {
 var totalbeforeTax;
 var totalbeforeTax2;
 
+//Calculating subtotal at each click
+function subtotalOfEach(){
+  var subtotalArray=[];
+  var OrderedPrices = $('span.ordered-item-price');
+  for(var i=0; i<OrderedPrices.length; i++){
+  subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
+  };
+  totalbeforeTax = 0;
+  console.log(subtotalArray);
+  subtotalArray.forEach(function(eachPrice){
+    totalbeforeTax += eachPrice;
+    totalbeforeTax2 = (totalbeforeTax).toFixed(2);
+    $('#subtotal2').val(totalbeforeTax2);
+    return totalbeforeTax2;
+  });
+};//End of Subtotal function
+
+// Calucuating Total
+// Calculating discount
+function calculateDiscount(){
+var discount = ($('#discount-rate2').val())*0.01;
+var totalWithDiscount = totalbeforeTax2 * (1 - discount);
+console.log(totalbeforeTax2);
+var discountedTotal = $("#discountedTotal").val(totalWithDiscount.toFixed(2));
+console.log(discountedTotal);
+
+// Calculating grandtotal
+var grandTotal = totalWithDiscount+(totalWithDiscount*0.08875);
+$('#grand-total2').val(grandTotal.toFixed(2));
+};
+
+// Calling discount function when a input is present;
+$('#discount-rate2').on('keypress',function(){
+  calculateDiscount();
+});
 
 //Identifing each item in inventory
   var ulWineTypes = $('#wine-types');
@@ -59,12 +94,12 @@ var totalbeforeTax2;
     }
     wine.brands.forEach(function(brand,index) {
       var $eachBrandButton = $('<button>', {id:index, class:'brand-name'}).html(brand.name + " $" + brand.price + " size:" + brand.size)
-      ulBrands.append($('<li>').append($eachBrandButton));
+      ulBrands.append($('<li class="eachBrand-li">').append($eachBrandButton));
     });
     $('.'+wine.type+"-li").append(ulBrands);
   }); // end of wines.forEach()
 
-//Show inventory by category in DOM
+//Toggle inventory by category in DOM
   $('.red').click(function(){
     $('#red-brands').toggle();
   });
@@ -78,45 +113,11 @@ var totalbeforeTax2;
   });
 
 
-  //Calculating subtotal at each click
-  function subtotalOfEach(){
-    var subtotalArray=[];
-    var OrderedPrices = $('span.ordered-item-price');
-    for(var i=0; i<OrderedPrices.length; i++){
-    subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
-    };
-    totalbeforeTax = 0;
-    console.log(subtotalArray);
-    subtotalArray.forEach(function(eachPrice){
-      totalbeforeTax += eachPrice;
-      totalbeforeTax2 = (totalbeforeTax).toFixed(2);
-      $('#subtotal2').val(totalbeforeTax2);
-      return totalbeforeTax2;
-    });
-  };//End of Subtotal function
-
-  // Calucuating Total
-  // Calculating discount
-  function calculateDiscount(){
-  var discount = ($('#discount-rate2').val())*0.01;
-  var totalWithDiscount = totalbeforeTax2 * (1 - discount);
-  console.log(totalbeforeTax2);
-  var discountedTotal = $("#discountedTotal").val(totalWithDiscount.toFixed(2));
-  console.log(discountedTotal);
-
-  // Calculating grandtotal
-  var grandTotal = totalWithDiscount+(totalWithDiscount*0.08875);
-  $('#grand-total2').val(grandTotal.toFixed(2));
-  };
-
-  // Calling discount function when a input is present;
-  $('#discount-rate2').on('keypress',function(){
-    calculateDiscount();
-  });
 
 //Setting up the shoping cart
   //Identifing Ordered Item
-  var ulCart = $('#order-list').append($('<ul class="shopping-cart" >'));
+  var ulCart = $('<ul class="shopping-cart" >');
+  $('#order-list').append(ulCart);
   $('.brand-name').click(function(event){
     var clickedBrand = $(event.currentTarget);
     var parentID = clickedBrand.parent().parent().attr('id');
@@ -160,6 +161,7 @@ var totalbeforeTax2;
 
     subtotalOfEach();
     calculateDiscount();
+
 
   });//End of click to add/remove order items function
 

@@ -20,13 +20,22 @@ h1{
   margin-top: 0px;
 }
 .column1{
-  width:80%;
+  width:70%;
   height:100%;
   float:left;
   background-color: rgba(200, 200, 200, 0.85);
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   overflow: auto;
+}
+.column2{
+  width: 29.9%;
+  height: 100%;
+  float:right;
+  background-color: rgba(200, 200, 200, 0.85);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  overflow:auto;
 }
 
 h4{
@@ -40,30 +49,36 @@ ul{
 }
 
 .brand-name{
-  width: 100px;
+  width: 80%;
   border-radius: 15px;
-  margin-left: 25px;
+  margin:auto;
   margin-top: 10px;
   padding:5px;
   background-color: white;
 }
 
+.eachBrand-li{
+margin: auto;
+}
 #red-brands{
   display: none;
+  margin:auto;
 }
 
 #white-brands{
   display: none;
+  margin:auto;
 }
 
 #champagne-brands{
   display: none;
+  margin:auto;
 }
 
 ul#wine-types{
-  margin-left: 70px;
-
+  margin: 5px;
 }
+
 .clearfix:after {
      visibility: hidden;
      display: block;
@@ -103,7 +118,7 @@ ul#wine-types{
 button.red{
   margin: auto;
   height: 40px;
-  width: 150px;
+  width: 90%;
   text-transform: uppercase;
   background-color: #303030;
   color:#b9b9b9;
@@ -113,7 +128,7 @@ button.red{
 button.white{
   margin: auto;
   height: 40px;
-  width: 150px;
+  width: 90%;
   text-transform: uppercase;
   background-color: #303030;
   color:#b9b9b9;
@@ -123,21 +138,11 @@ button.white{
 button.champagne{
   margin: auto;
   height: 40px;
-  width: 150px;
+  width: 90%;
   text-transform: uppercase;
   background-color: #303030;
   color:#b9b9b9;
   border-radius: 15px;
-}
-
-.column2{
-  width: 19.9%;
-  height: 100%;
-  float:right;
-  background-color: rgba(200, 200, 200, 0.85);
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  overflow:auto;
 }
 
 #order-list{
@@ -153,4 +158,5 @@ span{
   margin-left: 10px;
   font-size: 13px;
   font-family: sans-serif;
+  width: 90%;
 }
