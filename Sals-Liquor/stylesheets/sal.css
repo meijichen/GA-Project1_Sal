@@ -1,12 +1,12 @@
 .container{
-    width: 1000px;
-
+    width: 850px;
     height: 80%;
     margin: auto;
     border: solid gray 1px;
   }
 h1{
   background-color: white;
+  text-align: center;
 }
 .menu-container{
   background-color: green;
@@ -32,4 +32,19 @@ h1{
   float:right;
   border-color: solid gray 1px;
   background: blue;
+}
+
+ul{
+  display: inline;
+  list-style-type: none;
+}
+
+button.red{
+  margin: 20px;
+  height: 30px;
+}
+
+button.white{
+  margin: 20px;
+  height: 30px;
 }
