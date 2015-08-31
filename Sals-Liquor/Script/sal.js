@@ -43,7 +43,6 @@ $(function() {
 
 var totalbeforeTax;
 var totalbeforeTax2;
-var submittedOrdersArray = [];
 var ulCart;
 var orderNumber;
 var OrderedItem;
@@ -55,7 +54,8 @@ var $orderedItemLi;
 var $purchaseLi;
 var grandTotal;
 var orderButtonID;
-var $OrderedItems
+var $OrderedItems;
+var submittedOrdersArray = [];
 
 //Function function....
 
@@ -116,16 +116,9 @@ function saveOrder(){
     $('#grand-total2').val('0');
   });//End of submit-order click function
 
-  // //submit order button also empties shopping-cart.
-  // $("#submit-order").click(function(){
-  //   ulCart.empty();
-  //   $('#subtotal2').val('0');
-  //   $("#discountedTotal").val('0');
-  //   $('#grand-total2').val('0');
-  // });//End of cart empty()
-  retrieveOrder();
 };//End of saveOrder function
 
+//retrieve order function
 function retrieveOrder(){
 $('.order-num-button').on('click',function(event){
 var orderTextID = $(event.currentTarget).attr('id');
@@ -133,9 +126,9 @@ var orderButtonIDArray = orderButtonID.split("");
 var orderID = orderButtonIDArray[orderButtonIDArray.length-1]
 ulBrands.append(submittedOrdersArray[orderID]);
 });
+subtotalOfEach();
+calculateTotal();
 };
-
-
 
 //Identifing each item in inventory
   var ulWineTypes = $('#wine-types');
@@ -220,6 +213,7 @@ ulBrands.append(submittedOrdersArray[orderID]);
   });//End of click to add/remove order items function
 
   saveOrder();
+  retrieveOrder();
 
 
 
