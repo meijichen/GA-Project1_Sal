@@ -54,42 +54,87 @@ var orderedItemArray = [];
 var $orderedItemLi;
 var $purchaseLi;
 var grandTotal;
+var orderButtonID;
+var $OrderedItems
 
 //Function function....
 
 //Calculating subtotal at each click
-  function subtotalOfEach(){
-    var subtotalArray=[];
-    var OrderedPrices = $('span.ordered-item-price');
-    for(var i=0; i<OrderedPrices.length; i++){
-    subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
-    };
-    totalbeforeTax = 0;
-    console.log(subtotalArray);
-    subtotalArray.forEach(function(eachPrice){
-      totalbeforeTax += eachPrice;
-      totalbeforeTax2 = (totalbeforeTax).toFixed(2);
-      $('#subtotal2').val(totalbeforeTax2);
-      return totalbeforeTax2;
+function subtotalOfEach(){
+  var subtotalArray=[];
+  var OrderedPrices = $('span.ordered-item-price');
+  for(var i=0; i<OrderedPrices.length; i++){
+  subtotalArray.push(parseFloat(OrderedPrices[i].textContent));
+  };
+  totalbeforeTax = 0;
+  console.log(subtotalArray);
+  subtotalArray.forEach(function(eachPrice){
+    totalbeforeTax += eachPrice;
+    totalbeforeTax2 = (totalbeforeTax).toFixed(2);
+    $('#subtotal2').val(totalbeforeTax2);
+    return totalbeforeTax2;
     });
   };//End of Subtotal function
 
 
-  // Calculating grand total
-  function calculateTotal(){
-  var discount = ($('#discount-rate2').val())*0.01;
-  var totalWithDiscount = totalbeforeTax2 * (1 - discount);
-  console.log(totalbeforeTax2);
-  var discountedTotal = $("#discountedTotal").val(totalWithDiscount.toFixed(2));
-  console.log(discountedTotal);
-  grandTotal = (totalWithDiscount+(totalWithDiscount*0.08875)).toFixed(2);
-  $('#grand-total2').val(grandTotal);
-  };
+// Calculating total
+function calculateTotal(){
+var discount = ($('#discount-rate2').val())*0.01;
+var totalWithDiscount = totalbeforeTax2 * (1 - discount);
+console.log(totalbeforeTax2);
+var discountedTotal = $("#discountedTotal").val(totalWithDiscount.toFixed(2));
+console.log(discountedTotal);
+grandTotal = (totalWithDiscount+(totalWithDiscount*0.08875)).toFixed(2);
+$('#grand-total2').val(grandTotal);
+}; // End of calculateTotal
 
-  // Calling discount function when a input is present;
-  $('#discount-rate2').on('keypress',function(){
-    calculateTotal();
-  });
+// Calling discount function when a input is present;
+$('#discount-rate2').on('keypress',function(){
+  calculateTotal();
+});
+
+  // Saving sales orders
+function saveOrder(){
+  $OrderedItems = $('.ordered-item');
+  for(var i=0; i<$OrderedItems.length; i++){
+  orderedItemArray.push(($OrderedItems[i]));
+  };
+  console.log(orderedItemArray);
+  $('#submit-order').on('click', function(){
+    submittedOrdersArray.push([orderedItemArray]);
+    orderNumber=submittedOrdersArray.length;
+    console.log('submittedOrdersArray')
+    console.log(submittedOrdersArray);
+    console.log(orderNumber);
+    $purchaseLi = $('<li>', {class:'purchase', id:orderNumber+'-li'});
+    var $orderbutton = $('<button>',{class:'order-num-button', id:'button'+orderNumber}).text('Order#: '+orderNumber);
+    $purchaseLi.append($orderbutton);
+    $('#sales-list').append($purchaseLi);
+    ulCart.empty();
+    $('#subtotal2').val('0');
+    $("#discountedTotal").val('0');
+    $('#grand-total2').val('0');
+  });//End of submit-order click function
+
+  // //submit order button also empties shopping-cart.
+  // $("#submit-order").click(function(){
+  //   ulCart.empty();
+  //   $('#subtotal2').val('0');
+  //   $("#discountedTotal").val('0');
+  //   $('#grand-total2').val('0');
+  // });//End of cart empty()
+  retrieveOrder();
+};//End of saveOrder function
+
+function retrieveOrder(){
+$('.order-num-button').on('click',function(event){
+var orderTextID = $(event.currentTarget).attr('id');
+var orderButtonIDArray = orderButtonID.split("");
+var orderID = orderButtonIDArray[orderButtonIDArray.length-1]
+ulBrands.append(submittedOrdersArray[orderID]);
+});
+};
+
 
 
 //Identifing each item in inventory
@@ -166,41 +211,16 @@ var grandTotal;
       $(event.currentTarget).remove();
       console.log("remove");
       subtotalOfEach();
-      calculateDiscount();
+      calculateTotal();
     });//End of order edit click function
 
     subtotalOfEach();
     calculateTotal();
 
   });//End of click to add/remove order items function
-    saveOrder();
 
-// Saving sales orders
-  function saveOrder(){
-    $('#submit-order').on('click', function(){
-      var $OrderedItems = $('.ordered-item');
-      for(var i=0; i<$OrderedItems.length; i++){
-      orderedItemArray.push(($OrderedItems[i].textContent + 'Sales Total:' + grandTotal));
-      };
-      console.log(orderedItemArray);
-      submittedOrdersArray.push([orderedItemArray]);
-      orderNumber=submittedOrdersArray.length;
+  saveOrder();
 
-      console.log(submittedOrdersArray);
-      console.log(orderNumber);
 
-      $purchaseLi = $('<li>', {class:'purchase', id:orderNumber+'-li'});
-      var $orderbutton = $('<button>',{class:'order-num-button', id:orderNumber+'button'}).text('Order#: '+orderNumber);
-      $purchaseLi.append($orderbutton);
-      $('#sales-list').append($purchaseLi);
-    });//End of submit-order click function
-
-    $("#submit-order").click(function(){
-      ulCart.empty();
-      $('#subtotal2').val('0');
-      $("#discountedTotal").val('0');
-      $('#grand-total2').val('0');
-    });//submit order button also empties shopping-cart.
-  };//End of saveOrder function
 
 }); // end of jQuery Closure
